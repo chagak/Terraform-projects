@@ -47,3 +47,28 @@ variable "ssh_location" {
   description    = "the ip address that can ssh into the ec2"
   type           = string
 }
+
+# rds variables
+variable "database_snapshot_identifier" {
+  default        = "arn:aws:rds:us-east-1:871909687521:snapshot:fleetcart-final-snapshot"
+  description    = "database snapshot arn form the previous fleetcart project"
+  type           = string
+}
+
+variable "database_instance_class" {
+  default        = "db.t2.micro"
+  description    = "the database instance type"
+  type           = string
+}
+# identifier is from rds Instance/Cluster Name (in my case is dev-rds-db)
+variable "database_instance_identifier" {
+  default        = "dev-rds-db"
+  description    = "the database instance identifier"
+  type           = string
+}
+
+variable "multi_az_deployment" {
+  default        = false
+  description    = "create a standy db instance"
+  type           = bool
+}
