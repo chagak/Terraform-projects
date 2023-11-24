@@ -79,3 +79,10 @@ variable "ssl_certificate_arn" {
   description    = "ssl certificate arn"
   type           = string
 }
+
+# sns topcis variables
+variable "operator_email" {
+  default        = "kchaggak@gmail.com"
+  description    = "a valid email address"
+  type           = string
+}
