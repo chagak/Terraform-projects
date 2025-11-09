@@ -129,3 +129,40 @@ resource "aws_security_group" "database_security_group" {
     Name = "database security group"
   }
 }
+
+resource "aws_security_group" "app_security_group" {
+  name        = "db-migration-sg"
+  description = "Security group for database migration instance"
+  vpc_id      = aws_vpc.vpc.id
+
+  # Outbound rule to MySQL/Aurora DB (adjust port if using different DB engine)
+  egress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    security_groups = [aws_security_group.database_security_group.id]
+    description     = "Allow connection to RDS"
+  }
+
+  # Outbound rule to S3 (via VPC endpoints or internet gateway)
+  egress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow HTTPS to S3 and other AWS services"
+  }
+
+  # Optional: SSH access if you need to connect for troubleshooting
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Replace with your IP or CIDR range
+    description = "SSH access from admin IP"
+  }
+
+  tags = {
+    Name = "DB Migration Security Group"
+  }
+}

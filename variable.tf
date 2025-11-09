@@ -48,6 +48,28 @@ variable "ssh_location" {
   type           = string
 }
 
+
+# rds-without-snapshot variables
+variable "db_username" {
+  default        = "chaga"
+  description    = "username of rds"
+  type           = string
+}
+
+variable "db_password" {
+  default        = "chaga123"
+  description    = "password of rds"
+  type           = string
+}
+
+variable "backup_bucket" {
+  default        = "chaganote-nest-sql-files"
+  description    = "password of rds"
+  type           = string
+}
+
+
+
 # rds variables
 variable "database_snapshot_identifier" {
   default        = "arn:aws:rds:us-east-1:871909687521:snapshot:fleetcart-final-snapshot"
@@ -56,7 +78,7 @@ variable "database_snapshot_identifier" {
 }
 
 variable "database_instance_class" {
-  default        = "db.t2.micro"
+  default        = "db.t3.micro"
   description    = "the database instance type"
   type           = string
 }
@@ -72,10 +94,10 @@ variable "multi_az_deployment" {
   description    = "create a standy db instance"
   type           = bool
 }
-
+#arn:aws:acm:us-east-1:871909687521:certificate/46d23f77-1a60-4279-a097-8c422e7f824d
 # application load balancer variables
 variable "ssl_certificate_arn" {
-  default        = "arn:aws:acm:us-east-1:871909687521:certificate/cedb88ba-0aac-425b-9d8a-f5c037c1de8a"
+  default        = "arn:aws:acm:us-east-1:871909687521:certificate/46d23f77-1a60-4279-a097-8c422e7f824d"
   description    = "ssl certificate arn"
   type           = string
 }
@@ -124,3 +146,10 @@ variable "record_name" {
   description    = "subdomain name"
   type           = string
 }
+
+# # Certificate Manager
+# variable "aws_acm_certificate" {
+#   default        = "www"
+#   description    = "subdomain name"
+#   type           = string
+# }

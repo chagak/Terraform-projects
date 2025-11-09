@@ -7,7 +7,7 @@ provider "aws" {
 # Store the terraform state file in S3
 terraform {
   backend "s3" {
-    bucket = "chaga-terraform-remote-state"
+    bucket = "chaganote-terraform-remote-state"
     key    = "terraform.tfstate.dev"
     region = "us-east-1"
     profile = "terraform-user"
